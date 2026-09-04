@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" content="#060B09" />
   <link rel="icon" href="assets/logo-1.jpg" />
   <link rel="canonical" href="https://www.azadglobaltrade.com/about.html" />
@@ -164,9 +164,60 @@ body{-webkit-tap-highlight-color:transparent}
 .gold-btn{box-shadow:0 10px 26px -14px rgba(201,160,80,.45)}
 .gold-btn:active{transform:scale(.97)}
 @media(prefers-reduced-motion:reduce){.fade-up,.fade-grid{opacity:1!important;transform:none!important;animation:none!important}.marquee-t{animation:none}.glow-line{animation:none}}
+
+/* ===== Mobile browser friendly ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+a,button,summary{touch-action:manipulation}
+body{overscroll-behavior-y:none}
+
+/* Safe-area insets for notched phones (iPhone notch / Android gesture bar) */
+.mobile-m{padding-bottom:env(safe-area-inset-bottom);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+#toTop{bottom:calc(1.5rem + env(safe-area-inset-bottom,0px));right:calc(1.5rem + env(safe-area-inset-right,0px))}
+
+/* Stat strip: proper borders on 2-col mobile grid (no stray divide lines) */
+.stat-grid > div{border-color:rgba(27,58,42,.2)}
+@media (max-width:1023px){
+  .stat-grid > div:nth-child(even){border-left:1px solid rgba(27,58,42,.2)}
+  .stat-grid > div:nth-child(n+3){border-top:1px solid rgba(27,58,42,.2)}
+}
+
+/* Very small phones (<360px) */
+@media (max-width:360px){
+  .stat-grid > div{padding-left:.75rem;padding-right:.75rem}
+  .faq-item summary{font-size:14px}
+}
+
+/* Videos on mobile: see script at end of body — autoplay is paused off-screen and disabled for Data-Saver users */
 </style>
 </head>
 <body class="bg-mesh">
+
+  <!-- PAGE LOAD ANIMATION (hides automatically once the page is ready) -->
+  <div id="preloader" aria-hidden="true">
+    <div class="pl-wrap">
+      <div class="pl-spin"></div>
+      <img src="assets/logo-1.jpg" alt="" width="64" height="64" class="pl-logo" />
+      <span class="pl-text">Azad Global Trade</span>
+    </div>
+  </div>
+  <script>
+  (function(){
+    var pl=document.getElementById('preloader');
+    if(!pl)return;
+    var hidden=false;
+    function hide(){
+      if(hidden)return;hidden=true;
+      pl.classList.add('done');
+      setTimeout(function(){ if(pl.parentNode) pl.parentNode.removeChild(pl); },700);
+    }
+    if(document.readyState==='complete'){hide()}
+    else{
+      window.addEventListener('load',hide);
+      /* Safety net: never block the page if a CDN is slow (mobile networks) */
+      setTimeout(hide,3000);
+    }
+  })();
+  </script>
   <a class="skip" href="#main">Skip to main content</a>
   <div id="progress" aria-hidden="true"></div>
 
@@ -260,7 +311,7 @@ body{-webkit-tap-highlight-color:transparent}
         <span class="bg-white rounded-sm p-0.5 flex items-center justify-center w-9 h-9"><img loading="lazy" decoding="async" src="assets/logo-1.jpg" alt="Azad Global Trade logo" class="w-[30px] h-[30px] object-contain" /></span>
         <span class="text-warm-200 font-extrabold text-sm tracking-[.12em] uppercase">Menu</span>
       </div>
-      <button id="closeMenu" class="text-warm-200 p-2" aria-label="Close menu"><i data-lucide="x" class="w-5 h-5"></i></button>
+      <button id="closeMenu" class="text-warm-200 p-3 min-w-11 min-h-11 flex items-center justify-center" aria-label="Close menu"><i data-lucide="x" class="w-5 h-5"></i></button>
     </div>
     <div class="flex flex-col gap-1 p-6">
       <a href="index.html" class="text-2xl font-bold text-warm-200 hover:text-gold-500 transition-colors py-2">Home</a>
@@ -322,7 +373,7 @@ body{-webkit-tap-highlight-color:transparent}
 
     <!-- Stat strip -->
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 lg:mt-20">
-      <div class="grid grid-cols-2 lg:grid-cols-4 divide-x divide-sage-900/20 border-y border-sage-900/20">
+      <div class="stat-grid grid grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-sage-900/20 border-y border-sage-900/20">
         <div class="px-4 lg:px-8 py-6 fade-up d1">
           <p class="text-3xl lg:text-4xl font-black text-warm-100 stat-n">3</p>
           <p class="text-[10px] uppercase tracking-[.2em] text-warm-600 mt-2">Countries Served</p>
@@ -742,7 +793,7 @@ body{-webkit-tap-highlight-color:transparent}
     window.addEventListener('scroll', () => {
       if (window.scrollY > 600) toTop.classList.remove('hidden');
       else toTop.classList.add('hidden');
-    });
+    }, { passive: true });
     toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
     // Reveal on scroll
@@ -847,5 +898,30 @@ body{-webkit-tap-highlight-color:transparent}
 (function(){var p=document.getElementById('progress');if(!p)return;function u(){var h=document.documentElement;p.style.width=Math.min(((h.scrollTop||0)/Math.max(h.scrollHeight-h.clientHeight,1))*100,100)+'%'}window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u()})();
 </script>
 <script src="assets/js/3d-engine.js"></script>
+<script>
+/* ===== Mobile battery & data friendly video handling ===== */
+(function(){
+  var vids = Array.prototype.slice.call(document.querySelectorAll('video'));
+  if(!vids.length) return;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  var saveData = !!(conn && conn.saveData);
+  if(reduceMotion || saveData){
+    // Disable autoplay entirely — show first frame only, saves data + battery
+    vids.forEach(function(v){ v.removeAttribute('autoplay'); try{ v.pause(); }catch(e){} });
+    return;
+  }
+  // Otherwise: play only while visible, pause when scrolled away (saves CPU/battery)
+  if('IntersectionObserver' in window){
+    var vo = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.play().catch(function(){}); }
+        else { e.target.pause(); }
+      });
+    }, { threshold: 0.2 });
+    vids.forEach(function(v){ vo.observe(v); });
+  }
+})();
+</script>
 </body>
 </html>

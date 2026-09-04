@@ -1029,8 +1029,10 @@ img, video, iframe, svg {
   
   .mobile-nav-menu,
   #mobileMenu {
-    padding-top: calc(5rem + env(safe-area-inset-top)) !important;
-    padding-bottom: calc(2rem + env(safe-area-inset-bottom)) !important;
+    /* Respect the notch/home-indicator only — menus have their own header bar,
+       a forced 5rem padding pushed every page's menu content down the screen */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
   }
   
   .fixed.bottom-6,
@@ -1451,6 +1453,64 @@ img, video, iframe, svg {
 .modal-3d-backdrop.open .modal-3d-box {
   transform: scale(1) translateY(0) rotateX(0);
 }
+
+/* --------------------------------------------------------------------------
+   9. GLOBAL MOBILE UX POLISH — consistent behaviour on every page
+   -------------------------------------------------------------------------- */
+
+/* Kill tap delay + accidental double-tap zoom on links/buttons/accordions */
+a, button, summary {
+  touch-action: manipulation;
+}
+
+/* iOS Safari zooms the page when focusing any input with font-size < 16px.
+   Bump form controls to 16px on phones so forms stay usable. */
+@media (max-width: 767px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Fluid media: nothing ever overflows the viewport on any screen */
+img, video, canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Long words / URLs wrap instead of breaking mobile layouts */
+p, li, h1, h2, h3, h4, h5, h6, td, th, a, span, div {
+  overflow-wrap: break-word;
+}
+
+/* Sticky navbars: older Safari needs the -webkit- backdrop prefix.
+   Guarded so modern browsers keep their existing (inline) values untouched. */
+@supports not (backdrop-filter: blur(1px)) {
+  #navbar,
+  .hdr {
+    -webkit-backdrop-filter: blur(20px);
+  }
+}
+
+/* Stop pull-to-refresh and rubber-banding fighting page scroll on mobile */
+body {
+  overscroll-behavior-y: none;
+}
+
+/* --------------------------------------------------------------------------
+   10. PAGE-LOAD ANIMATION (PRELOADER) — shared by every page
+   Hide automatically once the page is ready; 3s safety net lives in markup JS
+   -------------------------------------------------------------------------- */
+#preloader{position:fixed;top:0;right:0;bottom:0;left:0;z-index:200;display:-webkit-box;display:-ms-flexbox;display:flex;align-items:center;justify-content:center;background:#060B09;opacity:1;visibility:visible;-webkit-transition:opacity .5s ease,visibility .5s ease;transition:opacity .5s ease,visibility .5s ease}
+#preloader.done{opacity:0;visibility:hidden;pointer-events:none}
+#preloader .pl-wrap{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;align-items:center;justify-content:center}
+#preloader .pl-logo{width:64px;height:64px;border-radius:10px;overflow:hidden;box-shadow:0 0 40px rgba(201,160,80,.25);-webkit-animation:plPulse 1.6s ease-in-out infinite;animation:plPulse 1.6s ease-in-out infinite}
+#preloader .pl-spin{position:absolute;top:50%;left:50%;width:86px;height:86px;margin:-43px 0 0 -43px;border:2px solid rgba(58,138,92,.15);border-top-color:#C9A050;border-radius:50%;-webkit-animation:plSpin 1s linear infinite;animation:plSpin 1s linear infinite}
+#preloader .pl-text{position:absolute;top:calc(50% + 60px);left:0;right:0;text-align:center;font-size:10px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#6E655A}
+@keyframes plPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.92);opacity:.85}}
+@-webkit-keyframes plPulse{0%,100%{-webkit-transform:scale(1);opacity:1}50%{-webkit-transform:scale(.92);opacity:.85}}
+@keyframes plSpin{to{transform:rotate(360deg)}}
+@-webkit-keyframes plSpin{to{-webkit-transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){#preloader .pl-spin,#preloader .pl-logo{animation:none;-webkit-animation:none}}
 
 /* --------------------------------------------------------------------------
    8. MOBILE ANIMATION & RENDERING POLISH

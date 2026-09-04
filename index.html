@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" content="#060B09" />
   <title>Azad Global Trade — Premium Exporters from India</title>
   <meta name="description" content="Azad Global Trade is a registered Indian exporter of agricultural products, handicrafts, and eco-friendly goods. Direct sourcing, rigorous quality control, full documentation — shipping to buyers across 3 countries." />
@@ -134,8 +134,8 @@
     .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(58,138,92,.25),transparent)}
     .stat-n{font-variant-numeric:tabular-nums}
 
-    .mobile-m{transform:translateX(100%);transition:transform .4s cubic-bezier(.22,1,.36,1)}
-    .mobile-m.open{transform:translateX(0)}
+    .mobile-m{transform:translateX(100%);visibility:hidden;transition:transform .4s cubic-bezier(.22,1,.36,1),visibility 0s .4s}
+    .mobile-m.open{transform:translateX(0);visibility:visible;transition:transform .4s cubic-bezier(.22,1,.36,1)}
 
     .glow-line{height:2px;background:linear-gradient(90deg,transparent,#3A8A5C,#C9A050,#3A8A5C,transparent);background-size:200% 100%;animation:shimmer 4s linear infinite}
 
@@ -166,6 +166,33 @@ body{-webkit-tap-highlight-color:transparent}
     
 </head>
 <body class="bg-mesh">
+
+  <!-- PAGE LOAD ANIMATION (hides automatically once the page is ready) -->
+  <div id="preloader" aria-hidden="true">
+    <div class="pl-wrap">
+      <div class="pl-spin"></div>
+      <img src="assets/logo-1.jpg" alt="" width="64" height="64" class="pl-logo" />
+      <span class="pl-text">Azad Global Trade</span>
+    </div>
+  </div>
+  <script>
+  (function(){
+    var pl=document.getElementById('preloader');
+    if(!pl)return;
+    var hidden=false;
+    function hide(){
+      if(hidden)return;hidden=true;
+      pl.classList.add('done');
+      setTimeout(function(){ if(pl.parentNode) pl.parentNode.removeChild(pl); },700);
+    }
+    if(document.readyState==='complete'){hide()}
+    else{
+      window.addEventListener('load',hide);
+      /* Safety net: never block the page if a CDN is slow (mobile networks) */
+      setTimeout(hide,3000);
+    }
+  })();
+  </script>
   <a class="skip" href="#main">Skip to main content</a>
 
   <!-- SCROLL PROGRESS + CURSOR GLOW (premium layer) -->
@@ -200,7 +227,7 @@ body{-webkit-tap-highlight-color:transparent}
   </div>
 
   <!-- NAVIGATION -->
-  <nav id="navbar" class="sticky top-0 z-50 transition-all duration-300" style="background:rgba(6,11,9,.92);backdrop-filter:blur(20px);">
+  <nav id="navbar" class="sticky top-0 z-50 transition-all duration-300" style="background:rgba(6,11,9,.92);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 lg:h-[72px]">
         <a href="#" class="flex items-center gap-3 group">
@@ -243,14 +270,14 @@ body{-webkit-tap-highlight-color:transparent}
           </div>
           <a href="#contact" class="btn-3d-gold text-[11px] uppercase tracking-[.15em] px-6 py-3">Get Quote</a>
         </div>
-        <button id="menuBtn" class="lg:hidden text-warm-200 p-2" aria-label="Open menu"><i data-lucide="menu" class="w-5 h-5"></i></button>
+        <button id="menuBtn" class="lg:hidden text-warm-200 p-3 min-w-11 min-h-11 flex items-center justify-center" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu"><i data-lucide="menu" class="w-5 h-5"></i></button>
       </div>
     </div>
     <div class="glow-line"></div>
   </nav>
 
   <!-- MOBILE MENU -->
-  <div id="mobileMenu" class="mobile-m fixed inset-0 z-[60] bg-base-900 flex flex-col">
+  <div id="mobileMenu" class="mobile-m fixed inset-0 z-[60] bg-base-900 flex flex-col lg:hidden">
     <div class="flex items-center justify-between px-4 h-16 border-b border-sage-900/30">
       <div class="flex items-center gap-3">
         <span class="bg-white rounded-sm p-0.5 flex items-center justify-center">
@@ -261,10 +288,9 @@ body{-webkit-tap-highlight-color:transparent}
           <span class="text-warm-600 text-[8px] tracking-[.28em] uppercase">Global Trade</span>
         </span>
       </div>
-      <button id="closeMenu" class="text-warm-200 p-2" aria-label="Close menu"><i data-lucide="x" class="w-5 h-5"></i></button>
+      <button id="closeMenu" class="text-warm-200 p-3 min-w-11 min-h-11 flex items-center justify-center" aria-label="Close menu"><i data-lucide="x" class="w-5 h-5"></i></button>
     </div>
     <div class="flex-1 flex flex-col justify-center px-8 gap-5">
-      <a href="#location" class="ml text-2xl font-bold text-warm-200 hover:text-gold-500 transition-colors">Location</a>
       <a href="product.html" class="ml text-2xl font-bold text-warm-200 hover:text-gold-500 transition-colors">Products</a>
       <a href="documents.html" class="ml text-2xl font-bold text-warm-200 hover:text-gold-500 transition-colors">Documents</a>
       <a href="jutebags.html" class="ml text-2xl font-bold text-warm-200 hover:text-gold-500 transition-colors">Jute Bags</a>
@@ -488,8 +514,7 @@ body{-webkit-tap-highlight-color:transparent}
           </a>
 
         </div>
-
-      <br>
+       <br>
       <!-- Quick Action Row -->
       <div class="flex flex-wrap items-center justify-between gap-4 p-5 rounded-xl glass-3d-panel border border-sage-900/40">
         <div class="flex items-center gap-3">
@@ -545,7 +570,7 @@ body{-webkit-tap-highlight-color:transparent}
             <i data-lucide="check-circle" class="w-8 h-8 text-green-500 mb-4"></i>
             <h3 class="text-lg font-black text-warm-100 mb-2">Quality Assurance</h3>
             <p class="text-warm-500 text-sm leading-relaxed flex-grow">Every product undergoes multi-stage quality inspection in our processing facilities, backed by complete documentation and certifications.</p>
-          </div  >  
+          </div>  
 
 
       </div>
@@ -1182,7 +1207,7 @@ body{-webkit-tap-highlight-color:transparent}
   </footer>
 
   <!-- BACK TO TOP -->
-  <button id="backToTop" class="fixed bottom-6 right-6 z-50 w-10 h-10 bg-gold-600 text-base-900 rounded-sm flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 hover:bg-gold-500" aria-label="Back to top">
+  <button id="backToTop" class="fixed bottom-6 right-6 z-50 w-11 h-11 bg-gold-600 text-base-900 rounded-sm flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 hover:bg-gold-500" aria-label="Back to top">
     <i data-lucide="arrow-up" class="w-4 h-4"></i>
   </button>
 
@@ -1214,7 +1239,7 @@ body{-webkit-tap-highlight-color:transparent}
       nb.style.boxShadow = y>50 ? '0 4px 30px rgba(0,0,0,.3)' : 'none';
       btt.style.opacity = y>500 ? '1' : '0';
       btt.style.pointerEvents = y>500 ? 'auto' : 'none';
-    });
+    }, { passive: true });
     btt.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
 
     // Smooth scroll for in-page anchors
@@ -1520,5 +1545,28 @@ body{-webkit-tap-highlight-color:transparent}
     });
   })();
   </script>
+<script>
+/* ===== Mobile battery & data friendly video handling (hero video) ===== */
+(function(){
+  var vids = Array.prototype.slice.call(document.querySelectorAll('video'));
+  if(!vids.length) return;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  var saveData = !!(conn && conn.saveData);
+  if(reduceMotion || saveData){
+    vids.forEach(function(v){ v.removeAttribute('autoplay'); try{ v.pause(); }catch(e){} });
+    return;
+  }
+  if('IntersectionObserver' in window){
+    var vo = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.play().catch(function(){}); }
+        else { e.target.pause(); }
+      });
+    }, { threshold: 0.2 });
+    vids.forEach(function(v){ vo.observe(v); });
+  }
+})();
+</script>
 </body>
 </html>

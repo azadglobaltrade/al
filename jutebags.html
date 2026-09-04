@@ -291,6 +291,8 @@ nav a:not(.btn):hover,nav a[aria-current="page"]{color:var(--gold2)}
   .q-wrap{grid-template-columns:1fr}
   .ftr-grid{grid-template-columns:1fr 1fr}
 }
+/* Mobile nav: hidden on desktop — only shown inside the ≤860px media query below */
+.mobile-m{display:none}
 @media(max-width:860px){
   .menu-btn{display:flex}
   .lang-mob{display:block}
@@ -359,6 +361,19 @@ nav a:not(.btn):hover,nav a[aria-current="page"]{color:var(--gold2)}
     @media(hover:none){
       .btn:active{transform:scale(.96)}
     }
+
+    /* ===== Page-load animation (preloader — same as documents.html) ===== */
+    #preloader{position:fixed;top:0;right:0;bottom:0;left:0;z-index:200;display:-webkit-box;display:-ms-flexbox;display:flex;align-items:center;justify-content:center;background:#060B09;opacity:1;visibility:visible;-webkit-transition:opacity .5s ease,visibility .5s ease;transition:opacity .5s ease,visibility .5s ease}
+    #preloader.done{opacity:0;visibility:hidden;pointer-events:none}
+    #preloader .pl-wrap{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;align-items:center;justify-content:center}
+    #preloader .pl-logo{width:64px;height:64px;border-radius:10px;overflow:hidden;box-shadow:0 0 40px rgba(201,160,80,.25);-webkit-animation:plPulse 1.6s ease-in-out infinite;animation:plPulse 1.6s ease-in-out infinite}
+    #preloader .pl-spin{position:absolute;top:50%;left:50%;width:86px;height:86px;margin:-43px 0 0 -43px;border:2px solid rgba(58,138,92,.15);border-top-color:#C9A050;border-radius:50%;-webkit-animation:spin 1s linear infinite;animation:spin 1s linear infinite}
+    #preloader .pl-text{position:absolute;top:calc(50% + 60px);left:0;right:0;text-align:center;font-size:10px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#6E655A}
+    @keyframes plPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.92);opacity:.85}}
+    @-webkit-keyframes plPulse{0%,100%{-webkit-transform:scale(1);opacity:1}50%{-webkit-transform:scale(.92);opacity:.85}}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @-webkit-keyframes spin{to{-webkit-transform:rotate(360deg)}}
+    @media(prefers-reduced-motion:reduce){#preloader .pl-spin,#preloader .pl-logo{animation:none;-webkit-animation:none}}
   </style>
 <script type="application/ld+json">
 {
@@ -387,6 +402,33 @@ nav a:not(.btn):hover,nav a[aria-current="page"]{color:var(--gold2)}
 <body id="top">
     <div class="bg-mesh" aria-hidden="true"></div>
   <div id="progress" aria-hidden="true"></div>
+
+  <!-- PAGE LOAD ANIMATION (hides automatically once the page is ready) -->
+  <div id="preloader" aria-hidden="true">
+    <div class="pl-wrap">
+      <div class="pl-spin"></div>
+      <img src="assets/logo-1.jpg" alt="" width="64" height="64" class="pl-logo" />
+      <span class="pl-text">Azad Global Trade</span>
+    </div>
+  </div>
+  <script>
+  (function(){
+    var pl=document.getElementById('preloader');
+    if(!pl)return;
+    var hidden=false;
+    function hide(){
+      if(hidden)return;hidden=true;
+      pl.classList.add('done');
+      setTimeout(function(){ if(pl.parentNode) pl.parentNode.removeChild(pl); },700);
+    }
+    if(document.readyState==='complete'){hide()}
+    else{
+      window.addEventListener('load',hide);
+      /* Safety net: never block the page if a CDN is slow (mobile networks) */
+      setTimeout(hide,3000);
+    }
+  })();
+  </script>
 <a class="skip" href="#main">Skip to main content</a>
 <div class="topbar">
   <div class="wrap topbar-in">
@@ -464,6 +506,24 @@ nav a:not(.btn):hover,nav a[aria-current="page"]{color:var(--gold2)}
   <div class="glow-line" aria-hidden="true"></div>
 </nav>
 
+<!-- MOBILE NAVIGATION (was missing — hamburger had no menu to open) -->
+<div class="mobile-m" id="mobileMenu" aria-label="Menu">
+  <div class="mobile-head">
+    <a class="logo" href="index.html" aria-label="Azad Global Trade — home"><span class="logo-chip"><img loading="lazy" decoding="async" src="assets/logo-1.jpg" alt="" width="34" height="34" class="logo-img" /></span><span class="logo-txt"><strong>Azad</strong><span class="lt-sub">Global Trade</span></span></a>
+    <button class="mobile-close" id="closeMenu" aria-label="Close menu">&times;</button>
+  </div>
+  <nav class="mobile-links" aria-label="Mobile">
+    <a href="index.html">Home</a>
+    <a href="product.html">Products</a>
+    <a href="jutebags.html" aria-current="page">Jute Bags</a>
+    <a href="documents.html">Documents</a>
+    <a href="about.html">About</a>
+    <a href="index.html#process">Process</a>
+    <a href="index.html#why">Why Us</a>
+    <a href="blog.html">Blog</a>
+    <a href="#quote" style="margin-top:.75rem;border:1px solid var(--gold2);color:var(--gold2) !important;font-size:.8rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-align:center;padding:.8rem 1rem;border-radius:var(--rad)">Get Quote</a>
+  </nav>
+</div>
 
 <main id="main">
   <section class="hero" id="top" aria-labelledby="hero-h"><div class="wrap hero-grid">
@@ -693,9 +753,6 @@ nav a:not(.btn):hover,nav a[aria-current="page"]{color:var(--gold2)}
       <details><summary>How are jute bag prices structured for UK and EU B2B buyers?</summary><div><p>Pricing is quoted EXW, FOB Kolkata, CIF to your destination port or DDP to your warehouse. All prices are in USD unless agreed otherwise and include the written specification sheet. For UK and EU buyers we include freight, insurance and import duties in CIF/DDP quotes so there are no hidden costs at customs. Volume discounts apply — request an exact quote with your quantity band and destination.</p></div></details>
       <details><summary>Can you help with customs clearance and duty for first-time EU importers?</summary><div><p>We provide a complete shipping document set (commercial invoice, packing list, certificate of origin, bill of lading / airway bill) and can advise on HS code 6302 (jute bags) duty rates for the UK, Germany and the Netherlands. For first-time importers we recommend our DDP term which delivers to your door with all duties and taxes pre-paid, removing customs surprises entirely.</p></div></details>
      </div>
-  </div></section>
-  <section class="sec qform-wrap" id="quote" aria-labelledby="quote-h"><div class="wrap">
-    </div>
   </div></section>
   <section class="sec qform-wrap" id="quote" aria-labelledby="quote-h"><div class="wrap">
     <div class="q-wrap">

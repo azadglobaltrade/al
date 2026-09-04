@@ -269,6 +269,13 @@ p,li,h1,h2,h3,h4,h5,h6,td,th,a,span,div{overflow-wrap:break-word}
 #navbar,.top-bar{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
 #toTop{margin-bottom:env(safe-area-inset-bottom)}
 
+/* Stat strip: proper borders on 2-col mobile grid (no stray divide lines) */
+.stat-grid > div{border-color:rgba(27,58,42,.2)}
+@media (max-width:1023px){
+  .stat-grid > div:nth-child(even){border-left:1px solid rgba(27,58,42,.2)}
+  .stat-grid > div:nth-child(n+3){border-top:1px solid rgba(27,58,42,.2)}
+}
+
 /* ===== Easy page-load animation (preloader) ===== */
 #preloader{position:fixed;top:0;right:0;bottom:0;left:0;z-index:200;display:-webkit-box;display:-ms-flexbox;display:flex;align-items:center;justify-content:center;background:#060B09;opacity:1;visibility:visible;-webkit-transition:opacity .5s ease,visibility .5s ease;transition:opacity .5s ease,visibility .5s ease}
 #preloader.done{opacity:0;visibility:hidden;pointer-events:none}
@@ -402,7 +409,7 @@ p,li,h1,h2,h3,h4,h5,h6,td,th,a,span,div{overflow-wrap:break-word}
         <span class="bg-white rounded-sm p-0.5 flex items-center justify-center w-9 h-9"><img loading="lazy" decoding="async" src="assets/logo-1.jpg" alt="Azad Global Trade logo" class="w-[30px] h-[30px] object-contain" /></span>
         <span class="text-warm-200 font-extrabold text-sm tracking-[.12em] uppercase">Menu</span>
       </div>
-      <button id="closeMenu" class="text-warm-200 p-2" aria-label="Close menu"><i data-lucide="x" class="w-5 h-5"></i></button>
+      <button id="closeMenu" class="text-warm-200 p-3 min-w-11 min-h-11 flex items-center justify-center" aria-label="Close menu"><i data-lucide="x" class="w-5 h-5"></i></button>
     </div>
     <div class="flex flex-col gap-1 p-6">
       <a href="index.html" class="text-2xl font-bold text-warm-200 hover:text-gold-500 transition-colors py-2">Home</a>
@@ -463,7 +470,7 @@ p,li,h1,h2,h3,h4,h5,h6,td,th,a,span,div{overflow-wrap:break-word}
 
     <!-- Stat strip -->
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 lg:mt-20">
-      <div class="grid grid-cols-2 lg:grid-cols-4 divide-x divide-sage-900/20 border-y border-sage-900/20">
+      <div class="stat-grid grid grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-sage-900/20 border-y border-sage-900/20">
         <div class="px-4 lg:px-8 py-6 fade-up d1">
           <p class="text-3xl lg:text-4xl font-black text-warm-100 stat-n">9+</p>
           <p class="text-[10px] uppercase tracking-[.2em] text-warm-600 mt-2">Document Types</p>
@@ -777,8 +784,7 @@ p,li,h1,h2,h3,h4,h5,h6,td,th,a,span,div{overflow-wrap:break-word}
       </a>
     </div>
   </div>
- <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-        
+
   <script>
     const dateEl = document.getElementById('date');
     if (dateEl) dateEl.textContent = new Date().toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });

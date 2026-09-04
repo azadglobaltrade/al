@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#060B09" />
   <title>Jute Bag GSM Guide for European Weather | Azad Global Trade</title>
   <meta name="description" content="Which jute bag fabric weight survives European rain? A plain-English GSM guide for EU buyers — lamination, cost trade-offs and what to put in your spec.">
@@ -113,6 +113,29 @@
     .top-bar{background:linear-gradient(90deg,#0C1410,#121D17,#0C1410);border-bottom:1px solid rgba(58,138,92,.12)}
     .mobile-m{left:auto;right:100%;width:100%;transform:none;transition:right .4s cubic-bezier(.22,1,.36,1);overflow-y:auto;overscroll-behavior:contain}.mobile-m.open{right:0}
     body.menu-open{overflow:hidden}
+    /* ===== Mobile UX polish (consistent with the rest of the site) ===== */
+    html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+    *{-webkit-tap-highlight-color:transparent}
+    a,button,summary{touch-action:manipulation}
+    body{overscroll-behavior-y:none}
+    img,video,canvas{max-width:100%;height:auto}
+    p,li,h1,h2,h3,h4,h5,h6,td,th,a,span,div{overflow-wrap:break-word}
+    #navbar{-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
+    .mobile-m{padding-bottom:env(safe-area-inset-bottom);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+    #toTop{bottom:calc(1.5rem + env(safe-area-inset-bottom,0px));right:calc(1.5rem + env(safe-area-inset-right,0px))}
+    @media(max-width:767px){input,select,textarea{font-size:16px}}
+    /* ===== Page-load animation (preloader — consistent with the rest of the site) ===== */
+    #preloader{position:fixed;top:0;right:0;bottom:0;left:0;z-index:200;display:-webkit-box;display:-ms-flexbox;display:flex;align-items:center;justify-content:center;background:#060B09;opacity:1;visibility:visible;-webkit-transition:opacity .5s ease,visibility .5s ease;transition:opacity .5s ease,visibility .5s ease}
+    #preloader.done{opacity:0;visibility:hidden;pointer-events:none}
+    #preloader .pl-wrap{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;align-items:center;justify-content:center}
+    #preloader .pl-logo{width:64px;height:64px;border-radius:10px;overflow:hidden;box-shadow:0 0 40px rgba(201,160,80,.25);-webkit-animation:plPulse 1.6s ease-in-out infinite;animation:plPulse 1.6s ease-in-out infinite}
+    #preloader .pl-spin{position:absolute;top:50%;left:50%;width:86px;height:86px;margin:-43px 0 0 -43px;border:2px solid rgba(58,138,92,.15);border-top-color:#C9A050;border-radius:50%;-webkit-animation:plSpin 1s linear infinite;animation:plSpin 1s linear infinite}
+    #preloader .pl-text{position:absolute;top:calc(50% + 60px);left:0;right:0;text-align:center;font-size:10px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#6E655A}
+    @keyframes plPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.92);opacity:.85}}
+    @-webkit-keyframes plPulse{0%,100%{-webkit-transform:scale(1);opacity:1}50%{-webkit-transform:scale(.92);opacity:.85}}
+    @keyframes plSpin{to{transform:rotate(360deg)}}
+    @-webkit-keyframes plSpin{to{-webkit-transform:rotate(360deg)}}
+    @media(prefers-reduced-motion:reduce){#preloader .pl-spin,#preloader .pl-logo{animation:none;-webkit-animation:none}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.mobile-m{transition:none}}
     #progress{position:fixed;top:0;left:0;height:2px;z-index:60;background:linear-gradient(90deg,#3A8A5C,#DAB565)}
     .faq-item{border-bottom:1px solid rgba(58,138,92,.12)}
@@ -146,6 +169,33 @@ body{-webkit-tap-highlight-color:transparent}
 </style>
 </head>
 <body class="bg-mesh">
+
+  <!-- PAGE LOAD ANIMATION (hides automatically once the page is ready) -->
+  <div id="preloader" aria-hidden="true">
+    <div class="pl-wrap">
+      <div class="pl-spin"></div>
+      <img src="../assets/logo-1.jpg" alt="" width="64" height="64" class="pl-logo" />
+      <span class="pl-text">Azad Global Trade</span>
+    </div>
+  </div>
+  <script>
+  (function(){
+    var pl=document.getElementById('preloader');
+    if(!pl)return;
+    var hidden=false;
+    function hide(){
+      if(hidden)return;hidden=true;
+      pl.classList.add('done');
+      setTimeout(function(){ if(pl.parentNode) pl.parentNode.removeChild(pl); },700);
+    }
+    if(document.readyState==='complete'){hide()}
+    else{
+      window.addEventListener('load',hide);
+      /* Safety net: never block the page if a CDN is slow (mobile networks) */
+      setTimeout(hide,3000);
+    }
+  })();
+  </script>
   <a class="skip" href="#main">Skip to main content</a>
   <!-- TOP INFO BAR -->
   <div class="top-bar py-2 hidden lg:block">
@@ -201,7 +251,7 @@ body{-webkit-tap-highlight-color:transparent}
   </nav>
   <!-- MOBILE MENU -->
   <div id="mobileMenu" class="mobile-m fixed inset-0 z-[60] bg-base-900 lg:hidden">
-    <div class="flex items-center justify-between h-16 px-6 border-b border-sage-900/20"><div class="flex items-center gap-3"><span class="bg-white rounded-sm p-0.5 flex items-center justify-center w-9 h-9"><img loading="lazy" decoding="async" src="../assets/logo-1.jpg" alt="Azad Global Trade logo" class="w-[30px] h-[30px] object-contain" /></span><span class="text-warm-200 font-extrabold text-sm tracking-[.12em] uppercase">Menu</span></div><button id="closeMenu" class="text-warm-200 p-2" aria-label="Close menu"><i data-lucide="x" class="w-5 h-5"></i></button></div>
+    <div class="flex items-center justify-between h-16 px-6 border-b border-sage-900/20"><div class="flex items-center gap-3"><span class="bg-white rounded-sm p-0.5 flex items-center justify-center w-9 h-9"><img loading="lazy" decoding="async" src="../assets/logo-1.jpg" alt="Azad Global Trade logo" class="w-[30px] h-[30px] object-contain" /></span><span class="text-warm-200 font-extrabold text-sm tracking-[.12em] uppercase">Menu</span></div><button id="closeMenu" class="text-warm-200 p-3 min-w-11 min-h-11 flex items-center justify-center" aria-label="Close menu"><i data-lucide="x" class="w-5 h-5"></i></button></div>
     <div class="flex flex-col gap-1 p-6">
       <a href="../index.html" class="text-2xl font-bold text-warm-200 hover:text-gold-500 transition-colors py-2">Home</a>
       <a href="../product.html" class="text-2xl font-bold text-warm-200 hover:text-gold-500 transition-colors py-2">Products</a>
@@ -436,7 +486,7 @@ body{-webkit-tap-highlight-color:transparent}
   const menuBtn=document.getElementById('menuBtn'),closeMenu=document.getElementById('closeMenu'),mobileMenu=document.getElementById('mobileMenu');
   function closeMobileMenu(){mobileMenu.classList.remove('open');document.body.classList.remove('menu-open');menuBtn?.setAttribute('aria-expanded','false');menuBtn?.setAttribute('aria-label','Open menu');menuBtn?.focus();}
   menuBtn?.addEventListener('click',()=>{mobileMenu.classList.add('open');document.body.classList.add('menu-open');menuBtn.setAttribute('aria-expanded','true');menuBtn.setAttribute('aria-label','Close menu');});closeMenu?.addEventListener('click',closeMobileMenu);mobileMenu?.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMobileMenu));document.addEventListener('keydown',e=>{if(e.key==='Escape'&&mobileMenu?.classList.contains('open'))closeMobileMenu();});
-  const toTop=document.getElementById('toTop');window.addEventListener('scroll',()=>{if(window.scrollY>600)toTop.classList.remove('hidden');else toTop.classList.add('hidden');});
+  const toTop=document.getElementById('toTop');window.addEventListener('scroll',()=>{if(window.scrollY>600)toTop.classList.remove('hidden');else toTop.classList.add('hidden');},{passive:true});
   toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
   const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.12});
   document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));

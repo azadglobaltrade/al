@@ -218,6 +218,8 @@ p,li,h1,h2,h3,h4,h5,h6,td,th,a,span,div{overflow-wrap:break-word}
 #preloader .pl-text{position:absolute;top:calc(50% + 60px);left:0;right:0;text-align:center;font-size:10px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#6E655A}
 @keyframes plPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.92);opacity:.85}}
 @-webkit-keyframes plPulse{0%,100%{-webkit-transform:scale(1);opacity:1}50%{-webkit-transform:scale(.92);opacity:.85}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@-webkit-keyframes spin{to{-webkit-transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){#preloader .pl-spin,#preloader .pl-logo{animation:none;-webkit-animation:none}}
 </style>
 </head>
@@ -337,7 +339,7 @@ p,li,h1,h2,h3,h4,h5,h6,td,th,a,span,div{overflow-wrap:break-word}
 <div id="mobileMenu" class="mobile-m fixed inset-0 z-[60] bg-base-900 lg:hidden">
   <div class="flex items-center justify-between h-16 px-6 border-b border-sage-900/20">
     <span class="text-warm-200 font-extrabold text-sm tracking-[.12em] uppercase">Menu</span>
-    <button id="closeMenu" class="text-warm-200 p-2" aria-label="Close menu"><i data-lucide="x" class="w-5 h-5"></i></button>
+    <button id="closeMenu" class="text-warm-200 p-3 min-w-11 min-h-11 flex items-center justify-center" aria-label="Close menu"><i data-lucide="x" class="w-5 h-5"></i></button>
   </div>
   <div class="flex flex-col gap-1 p-6">
     <a href="index.html" class="text-2xl font-bold text-warm-200 hover:text-gold-500 transition-colors py-2">Home</a>

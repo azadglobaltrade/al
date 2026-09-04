@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#060B09" />
   <title>Sustainable Jute Packaging for the EU Market | Azad Global Trade</title>
   <meta name="description" content="A practical guide for EU market retailers comparing jute packaging with plastic, including sourcing, documentation and private-label supply from India.">
@@ -171,6 +171,8 @@ p,li,h1,h2,h3,h4,h5,h6,td,th,a,span,div{overflow-wrap:break-word}
 #preloader .pl-text{position:absolute;top:calc(50% + 60px);left:0;right:0;text-align:center;font-size:10px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#6E655A}
 @keyframes plPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.92);opacity:.85}}
 @-webkit-keyframes plPulse{0%,100%{-webkit-transform:scale(1);opacity:1}50%{-webkit-transform:scale(.92);opacity:.85}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@-webkit-keyframes spin{to{-webkit-transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){#preloader .pl-spin,#preloader .pl-logo{animation:none;-webkit-animation:none}}
 </style>
 </head>
@@ -261,7 +263,7 @@ p,li,h1,h2,h3,h4,h5,h6,td,th,a,span,div{overflow-wrap:break-word}
   </nav>
   <!-- MOBILE MENU -->
   <div id="mobileMenu" class="mobile-m fixed inset-0 z-[60] bg-base-900 lg:hidden">
-    <div class="flex items-center justify-between h-16 px-6 border-b border-sage-900/20"><div class="flex items-center gap-3"><span class="bg-white rounded-sm p-0.5 flex items-center justify-center w-9 h-9"><img loading="lazy" decoding="async" src="assets/logo-1.jpg" alt="Azad Global Trade logo" class="w-[30px] h-[30px] object-contain" /></span><span class="text-warm-200 font-extrabold text-sm tracking-[.12em] uppercase">Menu</span></div><button id="closeMenu" class="text-warm-200 p-2" aria-label="Close menu"><i data-lucide="x" class="w-5 h-5"></i></button></div>
+    <div class="flex items-center justify-between h-16 px-6 border-b border-sage-900/20"><div class="flex items-center gap-3"><span class="bg-white rounded-sm p-0.5 flex items-center justify-center w-9 h-9"><img loading="lazy" decoding="async" src="assets/logo-1.jpg" alt="Azad Global Trade logo" class="w-[30px] h-[30px] object-contain" /></span><span class="text-warm-200 font-extrabold text-sm tracking-[.12em] uppercase">Menu</span></div><button id="closeMenu" class="text-warm-200 p-3 min-w-11 min-h-11 flex items-center justify-center" aria-label="Close menu"><i data-lucide="x" class="w-5 h-5"></i></button></div>
     <div class="flex flex-col gap-1 p-6">
       <a href="index.html" class="text-2xl font-bold text-warm-200 hover:text-gold-500 transition-colors py-2">Home</a>
       <a href="products.html" class="text-2xl font-bold text-warm-200 hover:text-gold-500 transition-colors py-2">Products</a>
@@ -721,5 +723,28 @@ p,li,h1,h2,h3,h4,h5,h6,td,th,a,span,div{overflow-wrap:break-word}
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.azadglobaltrade.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.azadglobaltrade.com/blog.html"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are jute bags exempt from packaging taxes in the UK and EU?","acceptedAnswer":{"@type":"Answer","text":"Yes. The UK's Plastic Packaging Tax applies only to packaging with less than 30% recycled plastic, and the EU's incoming packaging regulation targets non-recyclable formats. Jute bags contain zero plastic — exempt in both markets, a direct saving of £200 per tonne under the UK tax."}},{"@type":"Question","name":"What is the minimum order for EU or UK delivery?","acceptedAnswer":{"@type":"Answer","text":"Minimum first orders start at 500 pieces. For established buyers, MOQs can be negotiated down to 200 pieces for stock-colour sizes. Full container loads (20,000–30,000 bags) get the best pricing."}},{"@type":"Question","name":"Can jute bags be printed with our logo?","acceptedAnswer":{"@type":"Answer","text":"Yes. We offer 1–4 colour screen printing on any bag style, with a digital artwork proof before physical samples. Woven labels and swing tags are also available for private-label programs."}},{"@type":"Question","name":"How long does shipping to the EU or UK take?","acceptedAnswer":{"@type":"Answer","text":"Total lead time is 28–32 days: 3–7 days for samples, 20–25 days for production, 5–7 days for sea freight to Felixstowe, Rotterdam or Hamburg. Express air (7–10 days) is available for urgent orders."}},{"@type":"Question","name":"What documentation is provided for EU & UK customs?","acceptedAnswer":{"@type":"Answer","text":"Every shipment includes a Commercial Invoice, Packing List, Certificate of Origin, and Phytosanitary Certificate. Jute fibre testing reports (ISO 14001) are available on request. All documents match the physical goods exactly."}}]}</script>
   <script src="assets/js/3d-engine.js"></script>
+<script>
+/* ===== Mobile battery & data friendly video handling ===== */
+(function(){
+  var vids = Array.prototype.slice.call(document.querySelectorAll('video'));
+  if(!vids.length) return;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  var saveData = !!(conn && conn.saveData);
+  if(reduceMotion || saveData){
+    vids.forEach(function(v){ v.removeAttribute('autoplay'); try{ v.pause(); }catch(e){} });
+    return;
+  }
+  if('IntersectionObserver' in window){
+    var vo = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.play().catch(function(){}); }
+        else { e.target.pause(); }
+      });
+    }, { threshold: 0.2 });
+    vids.forEach(function(v){ vo.observe(v); });
+  }
+})();
+</script>
 </body>
 </html>
