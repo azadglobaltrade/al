@@ -1,0 +1,44 @@
+[
+  {
+    "trackingId": "AGT-2026-2731",
+    "timestamp": "2026-09-01T20:07:49.748Z",
+    "name": "Alexander Wright",
+    "email": "alex.wright@ecoretail.co.uk",
+    "phone": "+44 7700 900077",
+    "company": "EcoRetail UK Ltd",
+    "country": "United Kingdom",
+    "productCategory": "Jute Bags & Eco Packaging",
+    "quantity": "15,000 units",
+    "incoterm": "CIF",
+    "message": "Looking for 350 GSM laminated jute totes for supermarket chain.",
+    "status": "RECEIVED_PENDING_REVIEW"
+  },
+  {
+    "trackingId": "AGT-2026-6251",
+    "timestamp": "2026-09-01T20:06:56.856Z",
+    "name": "Alexander Wright",
+    "email": "alex.wright@ecoretail.co.uk",
+    "phone": "+44 7700 900077",
+    "company": "EcoRetail UK Ltd",
+    "country": "United Kingdom",
+    "productCategory": "Jute Bags & Eco Packaging",
+    "quantity": "15,000 units",
+    "incoterm": "CIF",
+    "message": "Looking for 350 GSM laminated jute totes for supermarket chain.",
+    "status": "RECEIVED_PENDING_REVIEW"
+  },
+  {
+    "trackingId": "AGT-2026-7315",
+    "timestamp": "2026-09-01T19:54:30.625Z",
+    "name": "Alexander Wright",
+    "email": "alex.wright@ecoretail.co.uk",
+    "phone": "+44 7700 900077",
+    "company": "EcoRetail UK Ltd",
+    "country": "United Kingdom",
+    "productCategory": "Jute Bags & Eco Packaging",
+    "quantity": "15,000 units",
+    "incoterm": "CIF",
+    "message": "Looking for 350 GSM laminated jute totes for supermarket chain.",
+    "status": "RECEIVED_PENDING_REVIEW"
+  }
+]

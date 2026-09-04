@@ -1,0 +1,43 @@
+# Azad Global Trade — robots.txt
+# Domain TODO: verify domain matches what you actually deploy on.
+
+User-agent: *
+Allow: /
+
+# Explicitly welcome search engines
+User-agent: Googlebot
+Allow: /
+User-agent: Googlebot-Image
+Allow: /
+User-agent: Bingbot
+Allow: /
+User-agent: DuckDuckBot
+Allow: /
+
+# AI / answer engines — so ChatGPT, Claude, Perplexity etc. can cite us (GEO/AEO)
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-User
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Applebot
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+# Disallow private/admin paths
+Disallow: /.claude/
+Disallow: /tools/
+
+Sitemap: https://www.azadglobaltrade.com/sitemap.xml

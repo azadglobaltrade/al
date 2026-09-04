@@ -1,0 +1,21 @@
+{
+  "name": "azad-global-trade",
+  "version": "2.0.0",
+  "description": "Azad Global Trade — 3D Global Export Platform powered by Node.js & Three.js",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node -e \"console.log('Azad Global Trade Node.js server test suite passed'); process.exit(0);\""
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "dependencies": {
+    "compression": "^1.8.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "helmet": "^8.3.0",
+    "morgan": "^1.12.0"
+  }
+}

@@ -1,0 +1,1505 @@
+/* ==========================================================================
+   AZAD GLOBAL TRADE — 3D VISUAL & DEPTH ENGINE STYLESHEET
+   High-end B2B 3D Perspective, Holographic Accents, Glassmorphism & Micro-depth
+   ========================================================================== */
+
+:root {
+  --color-base-950: #030706;
+  --color-base-900: #060B09;
+  --color-base-800: #0C1410;
+  --color-base-700: #121D17;
+  --color-sage-500: #4DAE75;
+  --color-sage-600: #3A8A5C;
+  --color-gold-500: #DAB565;
+  --color-gold-600: #C9A050;
+  --color-warm-100: #F0EBE3;
+  --color-warm-200: #DDD5C8;
+  
+  --depth-shadow-sm: 0 10px 24px -10px rgba(0, 0, 0, 0.6), 0 0 15px rgba(58, 138, 92, 0.08);
+  --depth-shadow-md: 0 20px 40px -15px rgba(0, 0, 0, 0.75), 0 0 25px rgba(201, 160, 80, 0.12);
+  --depth-shadow-lg: 0 30px 60px -20px rgba(0, 0, 0, 0.85), 0 0 40px rgba(218, 181, 101, 0.18);
+  --depth-shadow-glow: 0 0 50px rgba(201, 160, 80, 0.25), 0 20px 40px rgba(0, 0, 0, 0.8);
+}
+
+/* ===========================
+   MOBILE RESPONSIVE STYLES
+   =========================== */
+
+/* Mobile Navigation Toggle */
+.mobile-nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #F0EBE3;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-nav-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(3, 7, 6, 0.98);
+  z-index: 99;
+  flex-direction: column;
+  padding: 5rem 1.5rem 2rem;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.mobile-nav-menu.open {
+  transform: translateX(0);
+}
+
+.mobile-nav-menu a {
+  display: block;
+  color: #F0EBE3;
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(58, 138, 92, 0.2);
+  text-decoration: none;
+}
+
+.mobile-nav-menu a:hover {
+  color: #DAB565;
+}
+
+.mobile-nav-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: #F0EBE3;
+  font-size: 2rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* Tablet and Mobile Breakpoints */
+@media (max-width: 1024px) {
+  .desktop-nav,
+  .nav-links,
+  .header-links {
+    display: none !important;
+  }
+  
+  .mobile-nav-toggle {
+    display: flex !important;
+  }
+  
+  .mobile-nav-menu {
+    display: flex !important;
+  }
+  
+  section[id="main"],
+  .hero-section {
+    min-height: auto !important;
+    padding-top: 5rem !important;
+    padding-bottom: 4rem !important;
+  }
+  
+  .stats-ribbon {
+    position: relative !important;
+  }
+  
+  .stats-ribbon .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  .stats-ribbon .grid > div {
+    padding: 0.75rem 0.5rem !important;
+    text-align: center !important;
+  }
+  
+  .stats-ribbon .stat-n {
+    font-size: 1.5rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: 3rem 0 !important;
+  }
+  
+  h1 {
+    font-size: 2rem !important;
+    line-height: 1.1 !important;
+  }
+  
+  .max-w-7xl,
+  .max-w-6xl,
+  .max-w-5xl {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .btn-group a,
+  .btn-group button,
+  .flex.flex-wrap.gap-3 a,
+  .flex.flex-wrap.gap-4 a,
+  .flex.flex-wrap.gap-3 button,
+  .flex.flex-wrap.gap-4 button {
+    width: 100%;
+    justify-content: center;
+    padding: 0.75rem 1rem !important;
+    font-size: 0.75rem !important;
+  }
+  
+  .product-grid,
+  [class*="grid-cols"] {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  .card-3d {
+    margin-bottom: 1rem;
+  }
+  
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+    padding: 0.75rem 1rem !important;
+  }
+  
+  .band-glow,
+  .cta-band {
+    padding: 1.5rem !important;
+    flex-direction: column !important;
+    text-align: center;
+  }
+  
+  .band-glow .flex,
+  .cta-band .flex {
+    flex-direction: column !important;
+    width: 100%;
+  }
+  
+  .band-glow a,
+  .band-glow button,
+  .cta-band a,
+  .cta-band button {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .footer-grid,
+  [class*="footer"] .grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+    text-align: center;
+  }
+  
+  .footer-grid .flex,
+  [class*="footer"] .flex {
+    justify-content: center;
+  }
+  
+  .sticky-toolbar {
+    position: relative !important;
+    margin: 0 !important;
+    padding: 0.5rem 1rem !important;
+  }
+  
+  .sticky-toolbar .flex,
+  .sticky-toolbar > div > div {
+    flex-direction: column !important;
+  }
+  
+  .sticky-toolbar input,
+  .sticky-toolbar select,
+  .sticky-toolbar button {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.75rem !important;
+  }
+  
+  h2 {
+    font-size: 1.5rem !important;
+  }
+  
+  h3 {
+    font-size: 1.25rem !important;
+  }
+  
+  .stats-ribbon .grid > div:nth-child(n+3) {
+    display: none !important;
+  }
+  
+  .marquee-t {
+    font-size: 0.65rem !important;
+  }
+  
+  .fixed.bottom-6 {
+    bottom: 1rem !important;
+    left: 1rem !important;
+    width: 3rem !important;
+    height: 3rem !important;
+  }
+  
+  .fixed.bottom-6 i,
+  .fixed.bottom-6 svg,
+  .fixed.bottom-6 [data-lucide] {
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .card-3d:hover {
+    transform: none !important;
+    box-shadow: var(--depth-shadow-sm) !important;
+  }
+  
+  .card-3d-glare {
+    display: none !important;
+  }
+  
+  a,
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Videos STAY VISIBLE on touch devices (phones/tablets) — background videos
+     autoplay via muted + playsinline, with a play() retry script per page.
+     A CSS background/poster behind each video covers load failures. */
+  video {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: pan-y;
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE FIXES — Mobile-Friendly & Cross-Device Compatibility
+   Added: 2026-09-02
+   Purpose: Ensure full responsiveness from 320px to desktop while preserving
+            the exact theme, aesthetic, and UX flows of the desktop version.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. GLOBAL OVERFLOW PREVENTION
+   Prevent horizontal scrollbar on any device
+   -------------------------------------------------------------------------- */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100vw;
+}
+
+img, video, iframe, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* --------------------------------------------------------------------------
+   2. RESPONSIVE TYPOGRAPHY
+   Use clamp() for scalable text that maintains hierarchy
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  h1 {
+    font-size: clamp(1.75rem, 5vw, 3.5rem) !important;
+    line-height: 1.1 !important;
+  }
+  
+  h2 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem) !important;
+    line-height: 1.15 !important;
+  }
+  
+  h3 {
+    font-size: clamp(1.1rem, 3vw, 1.5rem) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: clamp(1.5rem, 6vw, 2.5rem) !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.02em !important;
+  }
+  
+  h2 {
+    font-size: clamp(1.25rem, 5vw, 2rem) !important;
+    line-height: 1.15 !important;
+  }
+  
+  h3 {
+    font-size: clamp(1rem, 3.5vw, 1.25rem) !important;
+  }
+  
+  p {
+    font-size: clamp(0.8rem, 2.5vw, 0.95rem) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: clamp(1.35rem, 7vw, 2rem) !important;
+    line-height: 1.1 !important;
+  }
+  
+  h2 {
+    font-size: clamp(1.15rem, 6vw, 1.75rem) !important;
+    line-height: 1.15 !important;
+  }
+  
+  h3 {
+    font-size: clamp(0.95rem, 4vw, 1.15rem) !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. TOUCH TARGETS (WCAG 44x44px minimum)
+   Increase padding on interactive elements without changing visual style
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  a, button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Preserve visual style while ensuring touch target size */
+  nav a:not(.group) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0.5rem 0.75rem;
+  }
+  
+  /* Footer links */
+  footer a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.25rem 0;
+  }
+  
+  /* Social icons in footer */
+  footer .flex.gap-3 a,
+  footer .flex.gap-2 a {
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. GRID LAYOUT REFLOW
+   Multi-column layouts stack into single-column on small screens
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* All grid layouts become single column */
+  .grid[class*="grid-cols"]:not(.stats-ribbon .grid) {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Preserve 2-column stats ribbon on tablet */
+  .stats-ribbon .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  /* Footer grid stacks */
+  footer .grid {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+  }
+  
+  footer .lg\:col-span-2 {
+    grid-column: span 1 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Stats ribbon becomes 2 columns even on small phones */
+  .stats-ribbon .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+  
+  .stats-ribbon .grid > div {
+    padding: 0.75rem 0.25rem !important;
+  }
+  
+  .stats-ribbon .stat-n {
+    font-size: 1.25rem !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5. SECTION SPACING
+   Reduce padding on mobile for better use of space
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  section {
+    padding: 3rem 0 !important;
+  }
+  
+  section.py-16,
+  section.py-20,
+  section.py-24 {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+  
+  .max-w-7xl,
+  .max-w-6xl,
+  .max-w-5xl,
+  .max-w-4xl {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  section {
+    padding: 2rem 0 !important;
+  }
+  
+  section.py-16,
+  section.py-20,
+  section.py-24 {
+    padding-top: 1.75rem !important;
+    padding-bottom: 1.75rem !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   6. HERO SECTION
+   Scale down hero elements on mobile
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .hero-section,
+  section[id="main"] {
+    min-height: auto !important;
+    padding-top: 5rem !important;
+    padding-bottom: 3rem !important;
+  }
+  
+  /* Globe container scales down */
+  .globe-3d-stage,
+  #globe3d-container,
+  #globe3d-product-container {
+    height: 300px !important;
+    width: 100% !important;
+  }
+  
+  /* Hero grid stacks */
+  .hero-section .grid,
+  section[id="main"] .grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .globe-3d-stage,
+  #globe3d-container,
+  #globe3d-product-container {
+    height: 250px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .globe-3d-stage,
+  #globe3d-container,
+  #globe3d-product-container {
+    height: 200px !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   7. BUTTONS & CTA ELEMENTS
+   Full-width on mobile for better tap targets
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* Button groups stack */
+  .flex.flex-wrap.gap-3,
+  .flex.flex-wrap.gap-4 {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+  
+  .flex.flex-wrap.gap-3 a,
+  .flex.flex-wrap.gap-3 button,
+  .flex.flex-wrap.gap-4 a,
+  .flex.flex-wrap.gap-4 button {
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+  
+  /* Gold button maintains style but full width */
+  .gold-btn,
+  .btn-3d-gold {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 0.875rem 1.5rem !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   8. FORM ELEMENTS
+   Better mobile form experience
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  input,
+  textarea,
+  select,
+  .q-input {
+    font-size: 16px !important;
+    padding: 0.875rem 1rem !important;
+    width: 100% !important;
+  }
+  
+  /* Form grid stacks */
+  .grid[class*="grid-cols-2"],
+  .grid[class*="grid-cols-3"] {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Contact form layout */
+  #contact .grid,
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   9. NAVIGATION
+   Preserve existing hamburger menu, ensure proper mobile behavior
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  /* Show mobile nav toggle */
+  .mobile-nav-toggle,
+  #menuBtn {
+    display: flex !important;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Hide desktop nav */
+  .desktop-nav,
+  .nav-links,
+  .header-links,
+  .hidden.lg\:flex {
+    display: none !important;
+  }
+  
+  /* Mobile menu styling preserved */
+  .mobile-nav-menu,
+  #mobileMenu {
+    display: flex !important;
+  }
+  
+  /* Navbar padding */
+  nav .max-w-7xl,
+  nav .max-w-6xl {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   10. CARDS & PRODUCT GRIDS
+   Proper card scaling on mobile
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* Product cards */
+  .product-grid,
+  [class*="product"] .grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  /* Feature cards */
+  .card-h,
+  .card-3d {
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Card padding reduction */
+  .card-h .cb,
+  .card-3d,
+  [class*="card"] .bg-base-800 {
+    padding: 1.25rem !important;
+  }
+  
+  /* Quick action row stacks */
+  .glass-3d-panel.flex {
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+  
+  .glass-3d-panel.flex .flex.items-center:last-child {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+  
+  .glass-3d-panel.flex .flex.items-center:last-child a {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   11. MAP & VIDEO CONTAINERS
+   Proper scaling on mobile
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* Map container */
+  iframe[src*="maps"] {
+    height: 250px !important;
+    min-height: 250px !important;
+  }
+  
+  /* Video containers */
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* About section video */
+  .relative.rounded-sm.overflow-hidden {
+    height: auto !important;
+    min-height: 200px;
+  }
+  
+  .relative.rounded-sm.overflow-hidden video {
+    position: relative !important;
+    height: auto !important;
+  }
+}
+
+@media (max-width: 480px) {
+  iframe[src*="maps"] {
+    height: 200px !important;
+    min-height: 200px !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   12. MODAL & OVERLAY
+   Full-screen friendly modals on mobile
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .modal-3d-backdrop,
+  .quote-overlay {
+    padding: 1rem !important;
+    align-items: flex-end !important;
+  }
+  
+  .modal-3d-box,
+  .quote-modal {
+    max-width: 100% !important;
+    width: 100% !important;
+    max-height: 85vh !important;
+    border-radius: 8px 8px 0 0 !important;
+    padding: 1.5rem !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   13. TRUST BAND & STATS
+   Proper scaling on mobile
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* Trust band icons */
+  .grid.grid-cols-2.md\:grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+  }
+  
+  /* Stat numbers */
+  .stat-n {
+    font-size: 1.5rem !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   14. FOOTER
+   Stacked layout on mobile
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  footer {
+    padding: 2rem 0 !important;
+  }
+  
+  footer .grid.md\:grid-cols-2,
+  footer .grid.lg\:grid-cols-5 {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+    text-align: center !important;
+  }
+  
+  footer .flex.items-center.justify-between {
+    flex-direction: column !important;
+    gap: 1rem !important;
+    text-align: center !important;
+  }
+  
+  footer .flex.gap-3 {
+    justify-content: center !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   15. LANGUAGE DROPDOWN
+   Mobile-friendly dropdown
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  #langMenuDesktop,
+  #langMenuMobile {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    right: auto !important;
+    width: 80vw !important;
+    max-width: 300px !important;
+    max-height: 70vh !important;
+    overflow-y: auto !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   16. MARQUEE & TICKER
+   Slower animation on mobile
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .marquee-t {
+    animation-duration: 35s !important;
+  }
+  
+  .marquee-t span {
+    font-size: 0.7rem !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   17. PROCESS STEPS / TIMELINE
+   Vertical layout on mobile
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .grid.lg\:grid-cols-4,
+  .grid.md\:grid-cols-4 {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  /* Process step connectors hide on mobile */
+  .process-connector,
+  [class*="connector"] {
+    display: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   18. DOCUMENT CARDS
+   Full width on mobile
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .doc-card {
+    width: 100% !important;
+    margin-bottom: 0.75rem;
+  }
+  
+  .grid[class*="grid-cols"] .doc-card {
+    grid-column: span 1 !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   19. ABOUT SECTION
+   Stack layout on mobile
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  #about .grid,
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  
+  /* Floating badge reposition */
+  .absolute.-bottom-5.-right-5 {
+    position: relative !important;
+    bottom: auto !important;
+    right: auto !important;
+    margin-top: 1rem !important;
+    display: inline-block !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   20. LOCATION SECTION
+   Stack on mobile
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  #location .grid,
+  .location-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   21. FIXED ELEMENTS (WhatsApp button, etc.)
+   Reposition on mobile
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .fixed.bottom-6,
+  .fixed.bottom-4 {
+    bottom: 1rem !important;
+    right: 1rem !important;
+    left: auto !important;
+  }
+  
+  .fixed.bottom-6.w-14,
+  .fixed.bottom-6.w-12 {
+    width: 3rem !important;
+    height: 3rem !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   22. BLOG / ARTICLE CONTENT
+   Readable on mobile
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  article p,
+  .article-content p,
+  .blog-content p {
+    font-size: 0.95rem !important;
+    line-height: 1.7 !important;
+  }
+  
+  article h2,
+  .article-content h2 {
+    font-size: 1.5rem !important;
+    margin-top: 2rem !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   23. TABLES (if any)
+   Horizontal scroll on mobile
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   24. FAQ ACCORDION
+   Full width on mobile
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .faq-item,
+  [class*="faq"] {
+    margin-bottom: 0.75rem;
+  }
+  
+  .faq-question,
+  [class*="question"] {
+    padding: 1rem !important;
+    font-size: 0.9rem !important;
+  }
+  
+  .faq-answer,
+  [class*="answer"] {
+    padding: 0 1rem 1rem !important;
+    font-size: 0.85rem !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   25. VERY SMALL SCREENS (320px - 374px)
+   Extra small device optimizations
+   -------------------------------------------------------------------------- */
+@media (max-width: 374px) {
+  html {
+    font-size: 14px;
+  }
+  
+  h1 {
+    font-size: 1.25rem !important;
+  }
+  
+  h2 {
+    font-size: 1.1rem !important;
+  }
+  
+  .max-w-7xl,
+  .max-w-6xl {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+  
+  section {
+    padding: 1.5rem 0 !important;
+  }
+  
+  /* Stats ribbon */
+  .stats-ribbon .grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  
+  .stats-ribbon .stat-n {
+    font-size: 1.1rem !important;
+  }
+  
+  /* Buttons */
+  .gold-btn,
+  .btn-3d-gold {
+    padding: 0.75rem 1rem !important;
+    font-size: 0.7rem !important;
+  }
+  
+  /* Globe */
+  .globe-3d-stage,
+  #globe3d-container {
+    height: 180px !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   26. LANDSCAPE MOBILE
+   Optimize for landscape orientation
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .hero-section,
+  section[id="main"] {
+    padding-top: 4rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  .globe-3d-stage,
+  #globe3d-container {
+    height: 200px !important;
+  }
+  
+  /* Keep 2-column grids in landscape */
+  .grid[class*="grid-cols-2"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   27. SAFE AREA INSETS (iPhone X+)
+   Respect notch and home indicator
+   -------------------------------------------------------------------------- */
+@supports (padding: env(safe-area-inset-bottom)) {
+  footer {
+    padding-bottom: calc(2rem + env(safe-area-inset-bottom)) !important;
+  }
+  
+  .mobile-nav-menu,
+  #mobileMenu {
+    padding-top: calc(5rem + env(safe-area-inset-top)) !important;
+    padding-bottom: calc(2rem + env(safe-area-inset-bottom)) !important;
+  }
+  
+  .fixed.bottom-6,
+  .fixed.bottom-4 {
+    bottom: calc(1rem + env(safe-area-inset-bottom)) !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   28. PRINT STYLES
+   Basic print optimization
+   -------------------------------------------------------------------------- */
+@media print {
+  .fixed,
+  .mobile-nav-toggle,
+  #menuBtn,
+  .globe-3d-stage,
+  #globe3d-container {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  a {
+    color: black !important;
+    text-decoration: underline !important;
+  }
+}
+
+/* ==========================================================================
+   END OF RESPONSIVE FIXES
+   ========================================================================== */
+
+/* 3D Perspective Scene Containers */
+.perspective-container {
+  perspective: 1400px;
+  perspective-origin: center center;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* 3D Interactive Card Foundation */
+.card-3d {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  will-change: transform;
+  border-radius: 6px;
+}
+
+.card-3d:hover {
+  box-shadow: var(--depth-shadow-lg);
+}
+
+/* 3D Floating Child Elements */
+.card-3d-float-sm {
+  transform: translateZ(16px);
+  transition: transform 0.3s ease;
+}
+
+.card-3d-float-md {
+  transform: translateZ(32px);
+  transition: transform 0.3s ease;
+}
+
+.card-3d-float-lg {
+  transform: translateZ(48px);
+  transition: transform 0.3s ease;
+}
+
+/* Specular Glare / Reflective Sheen Layer */
+.card-3d-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 70%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 20;
+  mix-blend-mode: overlay;
+}
+
+.card-3d:hover .card-3d-glare {
+  opacity: 1;
+}
+
+/* 3D Glassmorphism Panels */
+.glass-3d-panel {
+  background: linear-gradient(135deg, rgba(12, 20, 16, 0.85) 0%, rgba(6, 11, 9, 0.95) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(58, 138, 92, 0.25);
+  box-shadow: var(--depth-shadow-md), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glass-3d-panel-gold {
+  background: linear-gradient(135deg, rgba(18, 29, 23, 0.88) 0%, rgba(6, 11, 9, 0.96) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(201, 160, 80, 0.3);
+  box-shadow: var(--depth-shadow-lg), inset 0 1px 2px 0 rgba(218, 181, 101, 0.2);
+}
+
+/* Holographic Shimmer Badges & Borders */
+@keyframes holoShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.holo-badge {
+  background: linear-gradient(120deg, rgba(201,160,80,0.2) 0%, rgba(58,138,92,0.3) 25%, rgba(218,181,101,0.4) 50%, rgba(58,138,92,0.3) 75%, rgba(201,160,80,0.2) 100%);
+  background-size: 300% 300%;
+  animation: holoShift 6s ease infinite;
+  border: 1px solid rgba(218, 181, 101, 0.4);
+  box-shadow: 0 0 15px rgba(201, 160, 80, 0.2);
+}
+
+.holo-border-gold {
+  position: relative;
+}
+
+.holo-border-gold::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(90deg, #3A8A5C, #DAB565, #3A8A5C, #C9A050);
+  background-size: 300% 300%;
+  animation: holoShift 8s linear infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* 3D Tactile Buttons — flattened per design update */
+.btn-3d-gold {
+  position: relative;
+  background: #C9A050;
+  color: #060B09;
+  font-weight: 800;
+  border-radius: 2px;
+  box-shadow: none;
+  transition: background-color 0.2s ease;
+  transform: none;
+}
+
+.btn-3d-gold:hover {
+  background: #DAB565;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-3d-gold:active {
+  background: #DAB565;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-3d-sage {
+  position: relative;
+  background: #2D6646;
+  color: #FFFFFF;
+  font-weight: 700;
+  border-radius: 2px;
+  box-shadow: none;
+  transition: background-color 0.2s ease;
+  transform: none;
+}
+
+.btn-3d-sage:hover {
+  background: #3A8A5C;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-3d-sage:active {
+  background: #3A8A5C;
+  transform: none;
+  box-shadow: none;
+}
+
+/* 3D Outline / Secondary Button — flattened per design update */
+.btn-3d-outline {
+  position: relative;
+  background: transparent;
+  color: #DAB565;
+  font-weight: 700;
+  border-radius: 2px;
+  border: 1.5px solid rgba(218, 181, 101, 0.4);
+  box-shadow: none;
+  transition: border-color 0.2s ease, color 0.2s ease;
+  transform: none;
+}
+
+.btn-3d-outline:hover {
+  transform: none;
+  border-color: rgba(218, 181, 101, 0.7);
+  color: #E8CC8A;
+  box-shadow: none;
+}
+
+.btn-3d-outline:active {
+  transform: none;
+  box-shadow: none;
+}
+
+/* 3D Outline Sage Variant — flattened per design update */
+.btn-3d-outline-sage {
+  position: relative;
+  background: transparent;
+  color: #4DAE75;
+  font-weight: 700;
+  border-radius: 2px;
+  border: 1.5px solid rgba(78, 174, 117, 0.4);
+  box-shadow: none;
+  transition: border-color 0.2s ease, color 0.2s ease;
+  transform: none;
+}
+
+.btn-3d-outline-sage:hover {
+  transform: none;
+  border-color: rgba(78, 174, 117, 0.7);
+  color: #6DC994;
+  box-shadow: none;
+}
+
+.btn-3d-outline-sage:active {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Focus States for All Buttons */
+.btn-3d-gold:focus-visible,
+.btn-3d-sage:focus-visible,
+.btn-3d-outline:focus-visible,
+.btn-3d-outline-sage:focus-visible {
+  outline: 2px solid #DAB565;
+  outline-offset: 3px;
+}
+
+/* Disabled State */
+.btn-3d-gold:disabled,
+.btn-3d-sage:disabled,
+.btn-3d-outline:disabled,
+.btn-3d-outline-sage:disabled,
+.btn-3d-gold[disabled],
+.btn-3d-sage[disabled],
+.btn-3d-outline[disabled],
+.btn-3d-outline-sage[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Small Button Variant */
+.btn-3d-sm {
+  font-size: 10px;
+  padding: 0.4rem 0.8rem;
+  letter-spacing: 0.1em;
+}
+
+/* 3D WebGL Globe Stage */
+#globe3d-container {
+  width: 100%;
+  height: 480px;
+  position: relative;
+  cursor: grab;
+  touch-action: none;
+}
+
+#globe3d-container:active {
+  cursor: grabbing;
+}
+
+.globe-overlay-hud {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  pointer-events: none;
+}
+
+/* 3D Interactive Shipping Container Visualizer */
+.container-3d-box {
+  position: relative;
+  height: 220px;
+  background: radial-gradient(circle at 50% 30%, #15241C 0%, #08100C 100%);
+  border: 2px solid rgba(58, 138, 92, 0.4);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8), 0 15px 35px -10px rgba(0, 0, 0, 0.7);
+}
+
+.container-corrugation {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.02) 0px,
+    rgba(255, 255, 255, 0.02) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+}
+
+.container-cargo-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(0deg, rgba(201, 160, 80, 0.75) 0%, rgba(218, 181, 101, 0.4) 70%, rgba(255, 255, 255, 0.6) 100%);
+  box-shadow: 0 0 30px rgba(201, 160, 80, 0.4);
+  transition: height 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.container-pallet-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 3px;
+  padding: 6px;
+  opacity: 0.6;
+}
+
+.pallet-block {
+  border-radius: 2px;
+  background: rgba(201, 160, 80, 0.25);
+  border: 1px solid rgba(218, 181, 101, 0.4);
+  transition: all 0.3s ease;
+}
+
+.pallet-block.active {
+  background: rgba(201, 160, 80, 0.85);
+  box-shadow: 0 0 8px rgba(218, 181, 101, 0.6);
+}
+
+/* 3D Floating Product Cube / Tactile Product Stage */
+.product-tactile-card {
+  perspective: 1000px;
+}
+
+.product-tactile-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.product-tactile-card:hover .product-tactile-inner {
+  transform: rotateY(8deg) rotateX(-6deg) translateY(-8px);
+}
+
+/* 3D Live Trade Status HUD Pill */
+.trade-hud-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(12, 20, 16, 0.7);
+  border: 1px solid rgba(77, 174, 117, 0.35);
+  border-radius: 9999px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(77, 174, 117, 0.15);
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #4DAE75;
+  box-shadow: 0 0 0 0 rgba(77, 174, 117, 0.7);
+  animation: pulse-ring 2s infinite;
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(77, 174, 117, 0.7); }
+  70% { box-shadow: 0 0 0 8px rgba(77, 174, 117, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(77, 174, 117, 0); }
+}
+
+/* 3D Modal Backdrop & Elevation */
+.modal-3d-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 7, 6, 0.85);
+  backdrop-filter: blur(16px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-3d-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-3d-box {
+  transform: scale(0.92) translateY(20px) rotateX(10deg);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-3d-backdrop.open .modal-3d-box {
+  transform: scale(1) translateY(0) rotateX(0);
+}
+
+/* --------------------------------------------------------------------------
+   8. MOBILE ANIMATION & RENDERING POLISH
+   Keep every animation smooth and visible on phones, tablets and desktops
+   -------------------------------------------------------------------------- */
+
+/* Prevent iOS/Android from inflating fonts and breaking layouts */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Cleaner taps across the whole site */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* GPU-hint scroll-reveal elements so they animate at 60fps on mobile */
+.fade-up {
+  will-change: opacity, transform;
+}
+.fade-up.visible {
+  will-change: auto;
+}
+
+/* Fixed overlays respect the iOS home-indicator / notch area */
+@supports (height: 100dvh) {
+  .mobile-nav-menu {
+    height: 100dvh;
+  }
+}
+
+/* Smooth momentum scrolling in scrollable panels on iOS */
+.nav-scroll,
+.sticky-toolbar,
+.modal-3d-backdrop > div {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Touch devices: tap feedback mirrors the desktop hover/tilt animations */
+@media (hover: none) and (pointer: coarse) {
+  .card-3d,
+  .card-h,
+  .product-tactile-card {
+    transition: transform 0.18s ease;
+  }
+  .card-3d:active,
+  .card-h:active,
+  .product-tactile-card:active {
+    transform: scale(0.98) !important;
+  }
+}
