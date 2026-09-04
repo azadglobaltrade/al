@@ -140,7 +140,7 @@
 </script>
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth;overflow-x:clip}
+  html{scroll-behavior:smooth;overflow-x:hidden;overflow-x:clip}
   body{font-family:'Plus Jakarta Sans',sans-serif;background:#060B09;color:#DDD5C8;overflow-x:hidden}
   ::selection{background:#C9A050;color:#060B09}
 /* A11Y: visible keyboard focus + skip link (ui-ux-pro-max priority 1) */
@@ -256,11 +256,61 @@ p,li,h1,h2,h3,h4,h5,h6,td,th,a,span,div{overflow-wrap:break-word}
   .doc-card:hover,.card-h:hover{transform:none}
   .doc-card:active,.card-h:active{transform:scale(.985)}
 }
+
+/* ===== Cross-browser compatibility (works in every browser) ===== */
+.modal-overlay{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+#navbar{-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
+.doc-card::before{top:0;right:0;bottom:0;left:0} /* fallback for older Safari (no inset support) */
+#docModal{top:0;right:0;bottom:0;left:0}
+.mobile-m{top:0;bottom:0;min-height:100vh;min-height:100dvh}
+@supports not (display:grid){.doc-grid-item.hide{position:static;display:none}}
+
+/* iPhone / notched phones: safe-area padding */
+#navbar,.top-bar{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+#toTop{margin-bottom:env(safe-area-inset-bottom)}
+
+/* ===== Easy page-load animation (preloader) ===== */
+#preloader{position:fixed;top:0;right:0;bottom:0;left:0;z-index:200;display:-webkit-box;display:-ms-flexbox;display:flex;align-items:center;justify-content:center;background:#060B09;opacity:1;visibility:visible;-webkit-transition:opacity .5s ease,visibility .5s ease;transition:opacity .5s ease,visibility .5s ease}
+#preloader.done{opacity:0;visibility:hidden;pointer-events:none}
+#preloader .pl-wrap{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;align-items:center;justify-content:center}
+#preloader .pl-logo{width:64px;height:64px;border-radius:10px;overflow:hidden;box-shadow:0 0 40px rgba(201,160,80,.25);-webkit-animation:plPulse 1.6s ease-in-out infinite;animation:plPulse 1.6s ease-in-out infinite}
+#preloader .pl-spin{position:absolute;top:50%;left:50%;width:86px;height:86px;margin:-43px 0 0 -43px;border:2px solid rgba(58,138,92,.15);border-top-color:#C9A050;border-radius:50%;-webkit-animation:spin 1s linear infinite;animation:spin 1s linear infinite}
+#preloader .pl-text{position:absolute;top:calc(50% + 60px);left:0;right:0;text-align:center;font-size:10px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#6E655A}
+@keyframes plPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.92);opacity:.85}}
+@-webkit-keyframes plPulse{0%,100%{-webkit-transform:scale(1);opacity:1}50%{-webkit-transform:scale(.92);opacity:.85}}
+@media(prefers-reduced-motion:reduce){#preloader .pl-spin,#preloader .pl-logo{animation:none;-webkit-animation:none}}
 </style>
 </head>
 <body class="bg-mesh">
   <a class="skip" href="#main">Skip to main content</a>
   <div id="progress" aria-hidden="true"></div>
+
+  <!-- PAGE LOAD ANIMATION (hides automatically once the page is ready) -->
+  <div id="preloader" aria-hidden="true">
+    <div class="pl-wrap">
+      <div class="pl-spin"></div>
+      <img src="assets/logo-1.jpg" alt="" width="64" height="64" class="pl-logo" />
+      <span class="pl-text">Azad Global Trade</span>
+    </div>
+  </div>
+  <script>
+  (function(){
+    var pl=document.getElementById('preloader');
+    if(!pl)return;
+    var hidden=false;
+    function hide(){
+      if(hidden)return;hidden=true;
+      pl.classList.add('done');
+      setTimeout(function(){ if(pl.parentNode) pl.parentNode.removeChild(pl); },700);
+    }
+    if(document.readyState==='complete'){hide()}
+    else{
+      window.addEventListener('load',hide);
+      /* Safety net: never block the page if a CDN is slow (mobile networks) */
+      setTimeout(hide,3000);
+    }
+  })();
+  </script>
 
   <!-- TOP INFO BAR -->
   <div class="top-bar py-2 hidden lg:block">
@@ -295,7 +345,7 @@ p,li,h1,h2,h3,h4,h5,h6,td,th,a,span,div{overflow-wrap:break-word}
   </div>
 
   <!-- NAVIGATION -->
-  <nav id="navbar" class="sticky top-0 z-50 transition-all duration-300" style="background:rgba(6,11,9,.92);backdrop-filter:blur(20px);">
+  <nav id="navbar" class="sticky top-0 z-50 transition-all duration-300" style="background:rgba(6,11,9,.92);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 lg:h-[72px]">
         <a href="index.html" class="flex items-center gap-3 group">
@@ -309,7 +359,7 @@ p,li,h1,h2,h3,h4,h5,h6,td,th,a,span,div{overflow-wrap:break-word}
         </a>
         <div class="hidden lg:flex items-center gap-7">
           <a href="index.html" class="text-warm-500 text-[11px] font-semibold uppercase tracking-[.15em] hover:text-gold-500 transition-colors">Home</a>
-          <a href="product.html" class="text-warm-500 text-[11px] font-semibold uppercase tracking-[.15em] hover:text-gold-500 transition-colors">Products</a>
+          <a href="products.html" class="text-warm-500 text-[11px] font-semibold uppercase tracking-[.15em] hover:text-gold-500 transition-colors">Products</a>
           <a href="jutebags.html" class="text-warm-500 text-[11px] font-semibold uppercase tracking-[.15em] hover:text-gold-500 transition-colors">Jute Bags</a>
           <a href="documents.html" class="text-gold-500 text-[11px] font-semibold uppercase tracking-[.15em]">Documents</a>
           <a href="about.html" class="text-warm-500 text-[11px] font-semibold uppercase tracking-[.15em] hover:text-gold-500 transition-colors">About</a>
@@ -356,7 +406,7 @@ p,li,h1,h2,h3,h4,h5,h6,td,th,a,span,div{overflow-wrap:break-word}
     </div>
     <div class="flex flex-col gap-1 p-6">
       <a href="index.html" class="text-2xl font-bold text-warm-200 hover:text-gold-500 transition-colors py-2">Home</a>
-      <a href="index.html#products" class="text-2xl font-bold text-warm-200 hover:text-gold-500 transition-colors py-2">Products</a>
+      <a href="products.html" class="text-2xl font-bold text-warm-200 hover:text-gold-500 transition-colors py-2">Products</a>
       <a href="jutebags.html" class="text-2xl font-bold text-warm-200 hover:text-gold-500 transition-colors py-2">Jute Bags</a>
       <a href="documents.html" class="text-2xl font-bold text-gold-500 py-2">Documents</a>
       <div class="relative mt-2" id="langDropdownMobile">
@@ -737,8 +787,13 @@ p,li,h1,h2,h3,h4,h5,h6,td,th,a,span,div{overflow-wrap:break-word}
 (function(){var p=document.getElementById('progress');if(!p)return;function u(){var h=document.documentElement;p.style.width=Math.min(((h.scrollTop||0)/Math.max(h.scrollHeight-h.clientHeight,1))*100,100)+'%'}window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u()})();
 </script>
   <script>
-    lucide.createIcons();
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // Safe icon rendering — page keeps working even if the lucide CDN fails or loads slowly
+    function renderIcons(){ if (window.lucide && typeof lucide.createIcons === 'function') { try { lucide.createIcons(); } catch(e){} } }
+    renderIcons();
+    var iconTries = 0;
+    var iconTimer = setInterval(function(){ if (window.lucide || ++iconTries > 20) { renderIcons(); clearInterval(iconTimer); } }, 250);
+    var yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
 
     // Mobile menu
     const menuBtn = document.getElementById('menuBtn');
@@ -752,11 +807,13 @@ p,li,h1,h2,h3,h4,h5,h6,td,th,a,span,div{overflow-wrap:break-word}
 
     // Back to top
     const toTop = document.getElementById('toTop');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 600) toTop.classList.remove('hidden');
-      else toTop.classList.add('hidden');
-    });
-    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    if (toTop) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 600) toTop.classList.remove('hidden');
+        else toTop.classList.add('hidden');
+      }, { passive: true });
+      toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    }
 
     // Documents data
     const documents = [
@@ -799,13 +856,17 @@ p,li,h1,h2,h3,h4,h5,h6,td,th,a,span,div{overflow-wrap:break-word}
     }
 
     grid.innerHTML = documents.map(cardHTML).join('');
-    lucide.createIcons();
+    renderIcons();
 
-    // Reveal on scroll
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+    // Reveal on scroll — with fallback for browsers without IntersectionObserver
+    if ('IntersectionObserver' in window) {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+    } else {
+      document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+    }
 
     // Card mouse glow
     document.querySelectorAll('.doc-card').forEach(card => {
@@ -849,7 +910,7 @@ p,li,h1,h2,h3,h4,h5,h6,td,th,a,span,div{overflow-wrap:break-word}
       document.getElementById('modalMeta').innerHTML = doc.meta.map(m => `<div class="flex items-center gap-2 text-xs text-warm-400"><i data-lucide="check" class="w-3.5 h-3.5 text-sage-500"></i>${m}</div>`).join('');
       document.getElementById('modalCta').href = `https://wa.me/919242156161?text=${encodeURIComponent('Request: ' + doc.title)}`;
       modal.classList.remove('hidden');
-      lucide.createIcons();
+      renderIcons();
     });
 
     document.getElementById('modalClose').addEventListener('click', () => modal.classList.add('hidden'));

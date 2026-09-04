@@ -89,7 +89,7 @@
       }
     }}}</script>
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;overflow-x:clip}
+    *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth;overflow-x:hidden;overflow-x:clip}
     body{font-family:'Plus Jakarta Sans',sans-serif;background:#060B09;color:#DDD5C8;overflow-x:hidden}
     ::selection{background:#C9A050;color:#060B09}
 /* A11Y: visible keyboard focus + skip link (ui-ux-pro-max priority 1) */
@@ -138,10 +138,73 @@ body{-webkit-tap-highlight-color:transparent}
 .gold-btn{box-shadow:0 10px 26px -14px rgba(201,160,80,.45)}
 .gold-btn:active{transform:scale(.97)}
 @media(prefers-reduced-motion:reduce){.fade-up,.fade-grid{opacity:1!important;transform:none!important;animation:none!important}.marquee-t{animation:none}.glow-line{animation:none}}
+
+/* ===== Mobile experience polish (easy viewing in any mobile browser) ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+img,video,canvas{max-width:100%;height:auto}
+p,li,h1,h2,h3,h4,h5,h6,td,th,a,span,div{overflow-wrap:break-word}
+@media(max-width:768px){
+  .fade-up{transform:translateY(14px);transition-duration:.55s}
+  .d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+}
+@media(hover:none){
+  .gold-btn:hover{animation:none}
+  .gold-btn::before{display:none}
+  .card-h:hover{transform:none}
+  .card-h:active{transform:scale(.985)}
+}
+
+/* ===== Cross-browser compatibility (works in every browser) ===== */
+#navbar{-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
+.mobile-m{top:0;bottom:0;min-height:100vh;min-height:100dvh}
+
+/* iPhone / notched phones: safe-area padding */
+#navbar,.top-bar{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+#toTop{margin-bottom:env(safe-area-inset-bottom)}
+
+/* ===== Easy page-load animation (preloader) ===== */
+#preloader{position:fixed;top:0;right:0;bottom:0;left:0;z-index:200;display:-webkit-box;display:-ms-flexbox;display:flex;align-items:center;justify-content:center;background:#060B09;opacity:1;visibility:visible;-webkit-transition:opacity .5s ease,visibility .5s ease;transition:opacity .5s ease,visibility .5s ease}
+#preloader.done{opacity:0;visibility:hidden;pointer-events:none}
+#preloader .pl-wrap{position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;align-items:center;justify-content:center}
+#preloader .pl-logo{width:64px;height:64px;border-radius:10px;overflow:hidden;box-shadow:0 0 40px rgba(201,160,80,.25);-webkit-animation:plPulse 1.6s ease-in-out infinite;animation:plPulse 1.6s ease-in-out infinite}
+#preloader .pl-spin{position:absolute;top:50%;left:50%;width:86px;height:86px;margin:-43px 0 0 -43px;border:2px solid rgba(58,138,92,.15);border-top-color:#C9A050;border-radius:50%;-webkit-animation:spin 1s linear infinite;animation:spin 1s linear infinite}
+#preloader .pl-text{position:absolute;top:calc(50% + 60px);left:0;right:0;text-align:center;font-size:10px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#6E655A}
+@keyframes plPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.92);opacity:.85}}
+@-webkit-keyframes plPulse{0%,100%{-webkit-transform:scale(1);opacity:1}50%{-webkit-transform:scale(.92);opacity:.85}}
+@media(prefers-reduced-motion:reduce){#preloader .pl-spin,#preloader .pl-logo{animation:none;-webkit-animation:none}}
 </style>
 </head>
 <body class="bg-mesh">
   <a class="skip" href="#main">Skip to main content</a>
+  <div id="progress" aria-hidden="true"></div>
+
+  <!-- PAGE LOAD ANIMATION (hides automatically once the page is ready) -->
+  <div id="preloader" aria-hidden="true">
+    <div class="pl-wrap">
+      <div class="pl-spin"></div>
+      <img src="assets/logo-1.jpg" alt="" width="64" height="64" class="pl-logo" />
+      <span class="pl-text">Azad Global Trade</span>
+    </div>
+  </div>
+  <script>
+  (function(){
+    var pl=document.getElementById('preloader');
+    if(!pl)return;
+    var hidden=false;
+    function hide(){
+      if(hidden)return;hidden=true;
+      pl.classList.add('done');
+      setTimeout(function(){ if(pl.parentNode) pl.parentNode.removeChild(pl); },700);
+    }
+    if(document.readyState==='complete'){hide()}
+    else{
+      window.addEventListener('load',hide);
+      /* Safety net: never block the page if a CDN is slow (mobile networks) */
+      setTimeout(hide,3000);
+    }
+  })();
+  </script>
+
   <!-- TOP INFO BAR -->
   <div class="top-bar py-2 hidden lg:block">
     <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
@@ -154,7 +217,7 @@ body{-webkit-tap-highlight-color:transparent}
     </div>
   </div>
   <!-- NAVIGATION -->
-  <nav id="navbar" class="sticky top-0 z-50 transition-all duration-300" style="background:rgba(6,11,9,.92);backdrop-filter:blur(20px);">
+  <nav id="navbar" class="sticky top-0 z-50 transition-all duration-300" style="background:rgba(6,11,9,.92);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 lg:h-[72px]">
         <a href="index.html" class="flex items-center gap-3 group"><span class="bg-white rounded-sm p-0.5 shadow-sm transition-transform duration-300 group-hover:scale-105 flex items-center justify-center"><img loading="lazy" decoding="async" src="assets/logo-1.jpg" alt="Azad Global Trade logo" class="w-[38px] h-[38px] object-contain" /></span><span class="leading-none"><span class="text-warm-100 font-extrabold text-sm tracking-[.18em] uppercase block">Azad</span><span class="text-warm-600 text-[8px] tracking-[.28em] uppercase">Global Trade</span></span></a>
@@ -201,7 +264,7 @@ body{-webkit-tap-highlight-color:transparent}
     <div class="flex items-center justify-between h-16 px-6 border-b border-sage-900/20"><div class="flex items-center gap-3"><span class="bg-white rounded-sm p-0.5 flex items-center justify-center w-9 h-9"><img loading="lazy" decoding="async" src="assets/logo-1.jpg" alt="Azad Global Trade logo" class="w-[30px] h-[30px] object-contain" /></span><span class="text-warm-200 font-extrabold text-sm tracking-[.12em] uppercase">Menu</span></div><button id="closeMenu" class="text-warm-200 p-2" aria-label="Close menu"><i data-lucide="x" class="w-5 h-5"></i></button></div>
     <div class="flex flex-col gap-1 p-6">
       <a href="index.html" class="text-2xl font-bold text-warm-200 hover:text-gold-500 transition-colors py-2">Home</a>
-      <a href="product.html" class="text-2xl font-bold text-warm-200 hover:text-gold-500 transition-colors py-2">Products</a>
+      <a href="products.html" class="text-2xl font-bold text-warm-200 hover:text-gold-500 transition-colors py-2">Products</a>
       <a href="jutebags.html" class="text-2xl font-bold text-warm-200 hover:text-gold-500 transition-colors py-2">Jute Bags</a>
       <a href="documents.html" class="text-2xl font-bold text-warm-200 hover:text-gold-500 transition-colors py-2">Documents</a>
       <a href="about.html" class="text-2xl font-bold text-warm-200 hover:text-gold-500 transition-colors py-2">About</a>
@@ -532,19 +595,36 @@ body{-webkit-tap-highlight-color:transparent}
     </div>
   </footer>
   <!-- BACK TO TOP -->
-  <button id="toTop" class="hidden fixed bottom-6 right-6 z-50 w-11 h-11 bg-base-800 border border-sage-900/30 rounded-sm flex items-center justify-center text-warm-400 hover:text-gold-500 hover:border-gold-600/40 transition-all" aria-label="Back to top"><i data-lucide="arrow-up" class="w-4 h-4"></i></button>  <script>lucide.createIcons();document.getElementById('year').textContent=new Date().getFullYear();
+  <button id="toTop" class="hidden fixed bottom-6 right-6 z-50 w-11 h-11 bg-base-800 border border-sage-900/30 rounded-sm flex items-center justify-center text-warm-400 hover:text-gold-500 hover:border-gold-600/40 transition-all" aria-label="Back to top"><i data-lucide="arrow-up" class="w-4 h-4"></i></button>  <script>
+  // Safe icon rendering — page keeps working even if the lucide CDN fails or loads slowly
+  function renderIcons(){ if (window.lucide && typeof lucide.createIcons === 'function') { try { lucide.createIcons(); } catch(e){} } }
+  renderIcons();
+  var iconTries=0;
+  var iconTimer=setInterval(function(){ if(window.lucide||++iconTries>20){ renderIcons(); clearInterval(iconTimer); } },250);
+  var yearEl=document.getElementById('year');if(yearEl)yearEl.textContent=new Date().getFullYear();
   const menuBtn=document.getElementById('menuBtn'),closeMenu=document.getElementById('closeMenu'),mobileMenu=document.getElementById('mobileMenu');
   function closeMobileMenu(){mobileMenu.classList.remove('open');document.body.classList.remove('menu-open');menuBtn?.setAttribute('aria-expanded','false');menuBtn?.setAttribute('aria-label','Open menu');menuBtn?.focus();}
   menuBtn?.addEventListener('click',()=>{mobileMenu.classList.add('open');document.body.classList.add('menu-open');menuBtn.setAttribute('aria-expanded','true');menuBtn.setAttribute('aria-label','Close menu');});closeMenu?.addEventListener('click',closeMobileMenu);mobileMenu?.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMobileMenu));document.addEventListener('keydown',e=>{if(e.key==='Escape'&&mobileMenu?.classList.contains('open'))closeMobileMenu();});
-  const toTop=document.getElementById('toTop');window.addEventListener('scroll',()=>{if(window.scrollY>600)toTop.classList.remove('hidden');else toTop.classList.add('hidden');});
-  toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
-  const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.12});
-  document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+  const toTop=document.getElementById('toTop');
+  if(toTop){
+    window.addEventListener('scroll',()=>{if(window.scrollY>600)toTop.classList.remove('hidden');else toTop.classList.add('hidden');},{passive:true});
+    toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+  }
+  // Reveal on scroll — with fallback for browsers without IntersectionObserver
+  if('IntersectionObserver' in window){
+    const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.12});
+    document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+  } else {
+    document.querySelectorAll('.fade-up').forEach(el=>el.classList.add('visible'));
+  }
   const readingProgress=document.getElementById('readingProgress');
-  function updateReadingProgress(){const article=document.querySelector('article');if(!article)return;const rect=article.getBoundingClientRect();const docHeight=article.scrollHeight-window.innerHeight+rect.top;const scrolled=window.scrollY-rect.top+window.innerHeight;const percent=Math.max(0,Math.min(100,(scrolled/docHeight)*100));readingProgress.style.width=percent+'%';}
-  window.addEventListener('scroll',updateReadingProgress);window.addEventListener('resize',updateReadingProgress);updateReadingProgress();
-  const tocLinks=document.querySelectorAll('.toc-link');const tocObserver=new IntersectionObserver((entries)=>{entries.forEach(entry=>{const id=entry.target.id;const link=document.querySelector('.toc-link[href="#'+id+'"]');if(entry.isIntersecting){tocLinks.forEach(l=>l.classList.remove('active'));link?.classList.add('active');}});},{root:null,rootMargin:'-40% 0px -40% 0px',threshold:0});
-  document.querySelectorAll('h2[id]').forEach(h2=>tocObserver.observe(h2));
+  function updateReadingProgress(){if(!readingProgress)return;const article=document.querySelector('article');if(!article)return;const rect=article.getBoundingClientRect();const docHeight=article.scrollHeight-window.innerHeight+rect.top;const scrolled=window.scrollY-rect.top+window.innerHeight;const percent=Math.max(0,Math.min(100,(scrolled/docHeight)*100));readingProgress.style.width=percent+'%';}
+  window.addEventListener('scroll',updateReadingProgress,{passive:true});window.addEventListener('resize',updateReadingProgress);updateReadingProgress();
+  const tocLinks=document.querySelectorAll('.toc-link');
+  if('IntersectionObserver' in window && tocLinks.length){
+    const tocObserver=new IntersectionObserver((entries)=>{entries.forEach(entry=>{const id=entry.target.id;const link=document.querySelector('.toc-link[href="#'+id+'"]');if(entry.isIntersecting){tocLinks.forEach(l=>l.classList.remove('active'));link?.classList.add('active');}});},{root:null,rootMargin:'-40% 0px -40% 0px',threshold:0});
+    document.querySelectorAll('h2[id]').forEach(h2=>tocObserver.observe(h2));
+  }
 
   /* Language Converter */
   function changeLanguage(langCode, label){
